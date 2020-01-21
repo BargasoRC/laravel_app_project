@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/','NameController@login');
-
-Route::get('/home','NameController@home');
-
-Route::get('/logout','NameController@logout');
-
-?>
+Route::get('/', function () {
+    return view('welcome');
+});
