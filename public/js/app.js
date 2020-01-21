@@ -106,7 +106,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(3);
-module.exports = __webpack_require__(9);
+module.exports = __webpack_require__(12);
 
 
 /***/ }),
@@ -134,7 +134,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuet
 * or customize the JavaScript scaffolding to fit your unique needs.
 */
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('example', __webpack_require__(19));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('example', __webpack_require__(9));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
@@ -53636,18 +53636,53 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_vue__;
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-// removed by extract-text-webpack-plugin
+var disposed = false
+var normalizeComponent = __webpack_require__(10)
+/* script */
+var __vue_script__ = __webpack_require__(18)
+/* template */
+var __vue_template__ = __webpack_require__(11)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/views/admin.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2376ba2c", Component.options)
+  } else {
+    hotAPI.reload("data-v-2376ba2c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */
+/* 10 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -53756,56 +53791,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 17 */,
-/* 18 */,
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(16)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = __webpack_require__(20)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/header.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b37ee638", Component.options)
-  } else {
-    hotAPI.reload("data-v-b37ee638", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 20 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53813,51 +53799,217 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-app",
+    { attrs: { id: "sandbox" } },
     [
+      _c("v-navigation-drawer", {
+        attrs: {
+          clipped: _vm.primaryDrawer.clipped,
+          floating: _vm.primaryDrawer.floating,
+          "mini-variant": _vm.primaryDrawer.mini,
+          permanent: _vm.primaryDrawer.type === "permanent",
+          temporary: _vm.primaryDrawer.type === "temporary",
+          app: "",
+          overflow: ""
+        },
+        model: {
+          value: _vm.primaryDrawer.model,
+          callback: function($$v) {
+            _vm.$set(_vm.primaryDrawer, "model", $$v)
+          },
+          expression: "primaryDrawer.model"
+        }
+      }),
+      _vm._v(" "),
       _c(
         "v-app-bar",
-        { attrs: { color: "#282a3b", height: "60px", dense: "", dark: "" } },
+        { attrs: { "clipped-left": _vm.primaryDrawer.clipped, app: "" } },
         [
-          _c("v-app-bar-nav-icon"),
-          _vm._v(" "),
-          _c("v-toolbar-title", [_vm._v("Page title")]),
-          _vm._v(" "),
-          _c("v-spacer"),
-          _vm._v(" "),
-          _c(
-            "v-menu",
-            {
-              attrs: { left: "", bottom: "" },
-              scopedSlots: _vm._u([
-                {
-                  key: "activator",
-                  fn: function(ref) {
-                    var on = ref.on
-                    return [
-                      _c(
-                        "v-btn",
-                        _vm._g({ attrs: { icon: "" } }, on),
-                        [_c("v-icon", [_vm._v("mdi-dots-vertical")])],
-                        1
-                      )
-                    ]
+          _vm.primaryDrawer.type !== "permanent"
+            ? _c("v-app-bar-nav-icon", {
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    _vm.primaryDrawer.model = !_vm.primaryDrawer.model
                   }
                 }
-              ])
-            },
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _c("v-toolbar-title", [_vm._v("Vuetify")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-content",
+        [
+          _c(
+            "v-container",
+            { attrs: { fluid: "" } },
             [
-              _vm._v(" "),
               _c(
-                "v-list",
-                _vm._l(5, function(n) {
-                  return _c(
-                    "v-list-item",
-                    { key: n, on: { click: function() {} } },
-                    [_c("v-list-item-title", [_vm._v("Option " + _vm._s(n))])],
+                "v-row",
+                { attrs: { align: "center", justify: "center" } },
+                [
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "10" } },
+                    [
+                      _c(
+                        "v-card",
+                        [
+                          _c(
+                            "v-card-text",
+                            [
+                              _c(
+                                "v-row",
+                                [
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12", md: "6" } },
+                                    [
+                                      _c("span", [_vm._v("Scheme")]),
+                                      _vm._v(" "),
+                                      _c("v-switch", {
+                                        attrs: { primary: "", label: "Dark" },
+                                        model: {
+                                          value: _vm.$vuetify.theme.dark,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.$vuetify.theme,
+                                              "dark",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "$vuetify.theme.dark"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12", md: "6" } },
+                                    [
+                                      _c("span", [_vm._v("Drawer")]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-radio-group",
+                                        {
+                                          attrs: { column: "" },
+                                          model: {
+                                            value: _vm.primaryDrawer.type,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.primaryDrawer,
+                                                "type",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "primaryDrawer.type"
+                                          }
+                                        },
+                                        _vm._l(_vm.drawers, function(drawer) {
+                                          return _c("v-radio", {
+                                            key: drawer,
+                                            attrs: {
+                                              label: drawer,
+                                              value: drawer.toLowerCase(),
+                                              primary: ""
+                                            }
+                                          })
+                                        }),
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c("v-switch", {
+                                        attrs: {
+                                          label: "Clipped",
+                                          primary: ""
+                                        },
+                                        model: {
+                                          value: _vm.primaryDrawer.clipped,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.primaryDrawer,
+                                              "clipped",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "primaryDrawer.clipped"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("v-switch", {
+                                        attrs: {
+                                          label: "Floating",
+                                          primary: ""
+                                        },
+                                        model: {
+                                          value: _vm.primaryDrawer.floating,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.primaryDrawer,
+                                              "floating",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "primaryDrawer.floating"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("v-switch", {
+                                        attrs: { label: "Mini", primary: "" },
+                                        model: {
+                                          value: _vm.primaryDrawer.mini,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.primaryDrawer,
+                                              "mini",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "primaryDrawer.mini"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12", md: "6" } },
+                                    [
+                                      _c("span", [_vm._v("Footer")]),
+                                      _vm._v(" "),
+                                      _c("v-switch", {
+                                        attrs: { label: "Inset", primary: "" },
+                                        model: {
+                                          value: _vm.footer.inset,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.footer, "inset", $$v)
+                                          },
+                                          expression: "footer.inset"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
                     1
                   )
-                }),
+                ],
                 1
               )
             ],
@@ -53865,7 +54017,13 @@ var render = function() {
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("v-footer", { attrs: { inset: _vm.footer.inset, app: "" } }, [
+        _c("span", { staticClass: "px-4" }, [
+          _vm._v("© " + _vm._s(new Date().getFullYear()))
+        ])
+      ])
     ],
     1
   )
@@ -53876,9 +54034,151 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-b37ee638", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2376ba2c", module.exports)
   }
 }
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      drawers: ['Default (no property)', 'Permanent', 'Temporary'],
+      primaryDrawer: {
+        model: dark,
+        type: 'permanent',
+        clipped: false,
+        floating: false,
+        mini: false
+      },
+      footer: {
+        inset: false
+      }
+    };
+  }
+});
 
 /***/ })
 /******/ ]);

@@ -14,7 +14,7 @@ Vue.use(Vuetify)
 * or customize the JavaScript scaffolding to fit your unique needs.
 */
 
-Vue.component('example', require('./components/header.vue'));
+Vue.component('example', require('./views/admin.vue'));
 
 const app = new Vue({
     el: '#app',
