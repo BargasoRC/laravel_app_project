@@ -1,13 +1,13 @@
 <template>
   <v-card class="mx-auto" max-width="100%">
     <v-card class="mx-auto" max-width="95%" outlined>
-      <v-data-table 
+      <v-data-table
         item-key="name"
-        :headers="headers" 
-        :items="desserts" 
-        sort-by="calories" 
-        class="elevation-1" 
-        :loading="loader" 
+        :headers="headers"
+        :items="desserts"
+        sort-by="calories"
+        class="elevation-1"
+        :loading="loader"
         loading-text="Loading... Please wait"
         :search="search"
       >
@@ -17,21 +17,17 @@
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
             <v-text-field
-                v-model="search"
-                append-icon="fas fa-search"
-                label="Search"
-                single-line
-                hide-details
+              v-model="search"
+              append-icon="fas fa-search"
+              label="Search"
+              single-line
+              hide-details
             ></v-text-field>
           </v-toolbar>
         </template>
         <template v-slot:item.action="{ item }">
-            <v-icon small @click="releaseTicket(item)">
-                far fa-check-circle
-            </v-icon>&nbsp;&nbsp;
-          <v-icon small @click="holdTicket(item)">
-              fas fa-thumbtack
-          </v-icon>
+          <v-icon small @click="releaseTicket(item)">far fa-check-circle</v-icon>&nbsp;&nbsp;
+          <v-icon small @click="holdTicket(item)">fas fa-thumbtack</v-icon>
         </template>
         <template v-slot:no-data>
           <v-btn color="primary" @click="initialize">Reset</v-btn>
@@ -60,18 +56,43 @@ export default {
         id: "vuechart-example"
       },
       xaxis: {
-        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+        title: {
+          text: 'Monthly Sales',
+          align: "left",
+          margin: 10,
+          offsetX: 0,
+          offsetY: 0,
+          floating: false,
+          style: {
+            fontSize: "24px",
+            color: "#39915b"
+          }
+        },
+        categories: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
+        ]
       }
     },
     series: [
       {
-        name: "series-1",
-        data: [30, 40, 45, 50, 49, 60, 70, 91]
+        name: "Monthly Sales",
+        data: [30, 40, 45, 50, 49, 60, 70, 91, 96, 200]
       }
     ],
     dialog: false,
-    loader:true,
-    search: '',
+    loader: true,
+    search: "",
     headers: [
       {
         text: "Passenger",
@@ -91,66 +112,60 @@ export default {
     desserts: [],
     defaultItem: {
       name: "",
-      ticketno:0,
+      ticketno: 0,
       busNumber: 0,
       passengerType: 0,
-      from:0,
-      to:0,
+      from: 0,
+      to: 0,
       fare: 0,
-      status:""
+      status: ""
     }
   }),
-
   watch: {
     dialog(val) {
       val || this.close();
     }
   },
-
   created() {
     this.initialize();
   },
-
   methods: {
     initialize() {
-        if(this.desserts !== []){
-            this.loader = false;
+      if (this.desserts !== []) {
+        this.loader = false;
+      }
+      this.desserts = [
+        {
+          name: "Renan Bargaso",
+          ticketno: "GTX-998-45",
+          busNumber: "9956",
+          passengerType: "Regular",
+          from: "Cebu",
+          to: "Dumaguete",
+          fare: 250,
+          status: "pending"
+        },
+        {
+          name: "Renan Cañete",
+          ticketno: "FORD-99Y-3",
+          busNumber: "9956",
+          passengerType: "Student",
+          from: "Cebu",
+          to: "Dumaguete",
+          fare: 210,
+          status: "pending"
         }
-        this.desserts = [
-            {
-                name: "Renan Bargaso",
-                ticketno:'GTX-998-45',
-                busNumber: '9956',
-                passengerType: 'Regular',
-                from:'Cebu',
-                to:'Dumaguete',
-                fare: 250,
-                status:'pending'
-            },
-            {
-                name: "Renan Cañete",
-                ticketno:'FORD-99Y-3',
-                busNumber: '9956',
-                passengerType: 'Student',
-                from:'Cebu',
-                to:'Dumaguete',
-                fare: 210,
-                status:'pending'
-            }
-        ];
+      ];
     },
-
     holdTicket(item) {
       const index = this.desserts.indexOf(item);
       confirm("Are you sure you want to delete this item?") &&
         this.desserts.splice(index, 1);
     },
-
     releaseTicket(item) {
-        const index = this.desserts.indexOf(item);
-        this.desserts[index].status = 'released';
+      const index = this.desserts.indexOf(item);
+      this.desserts[index].status = "released";
     }
-
   }
 };
 </script>
