@@ -21,11 +21,11 @@
           link
         >
           <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
+            <router-link :to="item.router"><v-icon>{{ item.icon }}</v-icon></router-link>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <router-link :to="item.router"><v-list-item-title>{{ item.title }}</v-list-item-title></router-link>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -48,7 +48,7 @@
           justify="center"
         >
           <v-col cols="12">
-            <dashboard></dashboard>
+            <router-view></router-view>
           </v-col>
         </v-row>
       </v-container>
@@ -66,19 +66,17 @@
 </style>
 
 <script>
-
-  import dashboard from "../components/buses.vue";
-
+  import dashboard from "../components/dashboard.vue";
   export default {
     components:{
       dashboard,
     },
     data: () => ({
       items: [
-          { title: 'Dashboard', icon: 'fas fa-tachometer-alt' },
-          { title: 'Buses', icon: 'fas fa-bus-alt'},
-          { title: 'Schedules', icon: 'far fa-calendar-alt' },
-          { title: 'My Account', icon: 'far fa-user-circle' },
+          { title: 'Dashboard', icon: 'fas fa-tachometer-alt',router: "/" },
+          { title: 'Buses', icon: 'fas fa-bus-alt', router: "/buses"},
+          { title: 'Schedules', icon: 'far fa-calendar-alt',router: "/schedules" },
+          { title: 'My Account', icon: 'far fa-user-circle',router: "/my_accounts" },
         ],
       primaryDrawer: {
         model: null,
