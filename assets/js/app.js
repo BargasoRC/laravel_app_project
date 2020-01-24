@@ -7,6 +7,7 @@
 
 import Vue from 'vue'
 import Vuetify from 'vuetify'
+import router from './router'
 Vue.use(Vuetify)
 /**
 * Next, we will create a fresh Vue application instance and attach it to
@@ -18,5 +19,6 @@ Vue.component('example', require('./views/admin.vue'));
 
 const app = new Vue({
     el: '#app',
+    router,
     vuetify: new Vuetify()
 });
