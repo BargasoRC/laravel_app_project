@@ -1,6 +1,6 @@
 <template>
-  <v-card class="mx-auto" max-width="100%">
-    <v-card class="mx-auto" max-width="95%" outlined>
+  <div>
+    <v-card class="mx-auto" outlined>
       <v-data-table
         item-key="name"
         :headers="headers"
@@ -34,10 +34,10 @@
         </template>
       </v-data-table>
     </v-card>
-    <v-card class="bookings mx-auto" max-width="95%" outlined>
+    <v-card class="bookings mx-auto" outlined>
       <apexchart width="100%" type="bar" :options="options" :series="series"></apexchart>
     </v-card>
-  </v-card>
+  </div>
 </template>
 <style scoped>
 .bookings {

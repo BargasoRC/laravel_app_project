@@ -32,7 +32,7 @@
           { text: 'From', value: 'from' },
           { text: 'To', value: 'to' },
           { text: 'Departure', value: 'departure' },
-          { text: 'Arrival', value: 'arrival' },
+          { text: 'Arrival', value: 'arrival' }
         ],
         desserts: [
           {
@@ -41,7 +41,7 @@
             from: 6.0,
             to: 24,
             departure: 4.0,
-            arrival: '1%',
+            arrival: '1%'
           },
           {
             name: 'Ice cream sandwich',
@@ -49,7 +49,7 @@
             from: 9.0,
             to: 37,
             departure: 4.3,
-            arrival: '1%',
+            arrival: '1%'
           },
         ],
       }

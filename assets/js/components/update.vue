@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" max-width="800" hover>
+  <v-card class="mx-auto" max-width="800">
     <v-card-text class="text--primary">
       <center>
         <form class="registration_form">
@@ -134,19 +134,31 @@
   </v-card>
 </template>
 <style scoped>
-    .registration_form {
-        width: 80%;
-    }
-    .form_buttons{
-        text-decoration: none;
-        outline: none;
-    }
+.registration_form {
+  width: 80%;
+}
+.form_buttons {
+  text-decoration: none;
+  outline: none;
+}
 </style>
 
 <script>
 import { validationMixin } from "vuelidate";
 import { required, maxLength, integer } from "vuelidate/lib/validators";
 export default {
+  mounted() {
+    const data = this.$route.params.data;
+    this.name = data.name,
+    this.busNo = data.busNo,
+    this.from = data.from,
+    this.start_time = data.departure,
+    this.arrival_time = data.arrival,
+    this.to = data.to, 
+    this.sp = data.child_fare,
+    this.regular = data.adult_fare,
+    this.seats = data.seats
+  },
   mixins: [validationMixin],
   validations: {
     name: { required },
@@ -163,7 +175,6 @@ export default {
   data: () => ({
     name: "",
     busNo: "",
-    start_time: "",
     start_time: null,
     start_time_modal: false,
     arrival_time: null,
@@ -242,8 +253,7 @@ export default {
     clear() {
       this.$v.$reset();
       this.name = "";
-      this.email = "";
-      this.start_time = "";
+      this.busNo = "";
       this.start_time = null;
       this.arrival_time = null;
       this.from = "";
