@@ -2,6 +2,7 @@
   <v-card class="mx-auto" max-width="800">
     <v-card-text class="text--primary">
       <center>
+        <h1 class='register'>REGISTRATION</h1>
         <form class="registration_form">
           <v-text-field
             v-model="name"
@@ -140,6 +141,10 @@
     .form_buttons{
         text-decoration: none;
         outline: none;
+    }
+    .register{
+      margin-top:50px;
+      margin-bottom:50px;
     }
 </style>
 
