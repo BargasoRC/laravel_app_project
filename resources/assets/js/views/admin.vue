@@ -8,6 +8,7 @@
       app
       overflow
       color="#EEEEEE"
+      width="20s0"
     >
       <center><v-img class="avatar" src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
       </center>
@@ -64,7 +65,7 @@
 export default {
   data: () => ({
     items: [
-      { title: "Dashboard", icon: "fas fa-tachometer-alt", router: "/" },
+      { title: "Dashboard", icon: "fas fa-tachometer-alt", router: "/dashboard" },
       { title: "Add Bus", icon: "fas fa-bus-alt", router: "/bus/add_bus" },
       { title: "Buses", icon: "fas fa-bus", router: "/bus" },
       { title: "Schedules", icon: "far fa-calendar-alt", router: "/schedules" },

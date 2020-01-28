@@ -10,7 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+/* api routes */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::post('/add_bus','Ticketing@store');
+Route::post('/add_seats','Ticketing@seats');
+
+/* end of api routes */
+
+Route::get('/admin', function () {
+    return view('admin');
 });

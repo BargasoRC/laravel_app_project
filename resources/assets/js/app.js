@@ -6,9 +6,11 @@
 
 
 import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import Vuetify from 'vuetify'
 import router from './router'
-Vue.use(Vuetify)
+Vue.use(Vuetify,VueAxios, axios)
 /**
 * Next, we will create a fresh Vue application instance and attach it to
 * the page. Then, you may begin adding components to this application

@@ -128,7 +128,6 @@ export default {
   },
   methods: {
     update(data) {
-      // this.$emit("update_data", data);
       this.$router.push({ name: "busUpdate", params: { data: data } });
     },
     remove(id) {}

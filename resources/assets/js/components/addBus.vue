@@ -2,8 +2,8 @@
   <v-card class="mx-auto" max-width="800">
     <v-card-text class="text--primary">
       <center>
-        <h1 class='register'>REGISTRATION</h1>
-        <form class="registration_form">
+        <h1 class="register">REGISTRATION</h1>
+        <v-form class="registration_form">
           <v-text-field
             v-model="name"
             :error-messages="nameErrors"
@@ -129,26 +129,27 @@
           ></v-text-field>
           <v-btn class="mr-4 form_buttons" rounded dark color="primary" @click="submit">submit</v-btn>
           <v-btn class="mr-4 form_buttons" tile outlined color="primary" @click="clear">clear</v-btn>
-        </form>
+        </v-form>
       </center>
     </v-card-text>
   </v-card>
 </template>
 <style scoped>
-    .registration_form {
-        width: 80%;
-    }
-    .form_buttons{
-        text-decoration: none;
-        outline: none;
-    }
-    .register{
-      margin-top:50px;
-      margin-bottom:50px;
-    }
+.registration_form {
+  width: 80%;
+}
+.form_buttons {
+  text-decoration: none;
+  outline: none;
+}
+.register {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
 </style>
 
 <script>
+import axios from "axios";
 import { validationMixin } from "vuelidate";
 import { required, maxLength, integer } from "vuelidate/lib/validators";
 export default {
@@ -242,11 +243,51 @@ export default {
   methods: {
     submit() {
       this.$v.$touch();
+      let data = {
+        name: this.name,
+        bus_number: this.busNo,
+        start_time: this.start_time,
+        end_time: this.arrival_time,
+        regular: this.regular,
+        non_regular: this.sp,
+        from: this.from,
+        to: this.to
+      };
+      axios
+        .post("/add_bus", data)
+        .then(response => {
+
+          console.log(response);
+          for(var i = 1; i <= this.seats; ++i){
+            let data = {
+              bus_id:response.data.id,
+              seat_number:i,
+              status:'vaccant'
+            }
+            axios
+              .post('/add_seats',data)
+              .then(res =>{
+                console.log(res);
+              })
+              .catch( error => console.log(error));
+          }
+          this.$v.$reset();
+          this.name = "";
+          this.busNo = "";
+          this.start_time = null;
+          this.arrival_time = null;
+          this.from = "";
+          this.to = "";
+          this.sp = "";
+          this.regular = "";
+          this.seats = "";
+        })
+        .catch(error => console.log(error));
     },
     clear() {
       this.$v.$reset();
       this.name = "";
-      this.email = "";
+      this.busNo = "";
       this.start_time = null;
       this.arrival_time = null;
       this.from = "";
