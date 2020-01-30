@@ -250,13 +250,13 @@ export default {
         end_time: this.arrival_time,
         regular: this.regular,
         non_regular: this.sp,
+        seats_number:this.seats,
         from: this.from,
         to: this.to
       };
       axios
         .post("/add_bus", data)
         .then(response => {
-
           console.log(response);
           for(var i = 1; i <= this.seats; ++i){
             let data = {

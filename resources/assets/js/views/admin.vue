@@ -8,7 +8,7 @@
       app
       overflow
       color="#EEEEEE"
-      width="20s0"
+      width="200"
     >
       <center><v-img class="avatar" src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
       </center>
@@ -31,7 +31,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar class="app_bar" :clipped-left="primaryDrawer.clipped" app>
+    <v-app-bar id="app_bar" :clipped-left="primaryDrawer.clipped" app>
       <v-icon @click="is_permanent" color="#E3F2FD" dense>fas fa-bars</v-icon>
     </v-app-bar>
 
@@ -53,7 +53,7 @@
   width: 30%;
   bottom: 0;
 }
-.app_bar {
+#app_bar {
   background: #1a4668;
 }
 .container_bg {

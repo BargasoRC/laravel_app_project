@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="12">
       <v-row>
-        <v-col v-for="(item, index) in buses" :key="index" cols="4">
+        <v-col v-for="(item, index) in list" :key="index" cols="4">
           <v-card class="bus mx-auto" hover>
             <v-img
               class="white--text align-end"
@@ -14,7 +14,7 @@
             <v-card-text class="text--primary">
               <div>
                 <b>Bus Number</b>
-                : {{item.busNo}}
+                : {{item.bus_number}}
               </div>
               <div>
                 <b>Journey From</b>
@@ -26,23 +26,23 @@
               </div>
               <div>
                 <b>Departure Time</b>
-                : {{item.departure}}
+                : {{item.start_time}}
               </div>
               <div>
                 <b>Arrival Time</b>
-                : {{item.arrival}}
+                : {{item.end_time}}
               </div>
               <div>
                 <b>Regular Fare</b>
-                : {{item.adult_fare}}
+                : {{item.regular}}
               </div>
               <div>
                 <b>Non-Regular Fare</b>
-                : {{item.child_fare}}
+                : {{item.non_regular}}
               </div>
               <div>
                 <b>Number of Seats</b>
-                : {{item.seats}}
+                : {{item.seats_number}}
               </div>
             </v-card-text>
             <v-card-actions>
@@ -67,70 +67,50 @@
 
 <script>
 import router from "../router";
+import axios from "axios";
 export default {
   data() {
     return {
-      buses: [
-        {
-          id: 1,
-          name: "Ceres",
-          busNo: 159,
-          from: 6.0,
-          to: 24,
-          departure: 4.0,
-          arrival: "1%",
-          adult_fare: "200",
-          child_fare: "160",
-          duration: 30,
-          seats: 50
-        },
-        {
-          id: 2,
-          name: "Ice cream sandwich",
-          busNo: 237,
-          from: 9.0,
-          to: 37,
-          departure: 4.3,
-          arrival: "1%",
-          adult_fare: "170",
-          child_fare: "110",
-          duration: 30,
-          seats: 50
-        },
-        {
-          id: 1,
-          name: "Ceres",
-          busNo: 159,
-          from: 6.0,
-          to: 24,
-          departure: 4.0,
-          arrival: "1%",
-          adult_fare: "200",
-          child_fare: "160",
-          duration: 30,
-          seats: 50
-        },
-        {
-          id: 2,
-          name: "Ice cream sandwich",
-          busNo: 237,
-          from: 9.0,
-          to: 37,
-          departure: 4.3,
-          arrival: "1%",
-          adult_fare: "170",
-          child_fare: "110",
-          duration: 30,
-          seats: 50
-        }
-      ]
+      buses: []
     };
+  },
+  computed:{
+    list(){
+      return this.buses
+    }
+  },
+  mounted(){
+    axios
+      .get('/retrieve_bus')
+      .then( res => {
+        this.buses = res.data;
+        console.log('retrieve',res.data)
+      })
+      .catch(error => console.log(error));
+  },
+  created(){
+    this.$bus.$on('remove_bus', (id) => {
+      this.buses.filter(function(object){
+        return object.id !== id;
+      });   
+    });
   },
   methods: {
     update(data) {
       this.$router.push({ name: "busUpdate", params: { data: data } });
     },
-    remove(id) {}
+    remove(id) {
+      axios
+      .delete(`/remove_bus/${id}`)
+      .then( res => {
+        if(res.status === 200){
+          this.$bus.$emit('remove_bus',id);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
   }
 };
 </script>

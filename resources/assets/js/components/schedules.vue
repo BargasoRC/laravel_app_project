@@ -11,13 +11,25 @@
     </v-card-title>
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="schdules"
       :search="search"
     ></v-data-table>
   </v-card>
 </template>
 <script>
+  import axios from 'axios';
   export default {
+    mounted(){
+      axios
+        .get('/bus_schedules')
+        .then( response =>{
+          console.log(response.data)
+          this.schdules = response.data;
+        })
+        .catch( err => {
+          console.log(err)
+        })
+    },
     data () {
       return {
         search: '',
@@ -28,30 +40,13 @@
             sortable: true,
             value: 'name',
           },
-          { text: 'Bus Number', value: 'busNo' },
+          { text: 'Bus Number', value: 'bus_number' },
           { text: 'From', value: 'from' },
           { text: 'To', value: 'to' },
-          { text: 'Departure', value: 'departure' },
-          { text: 'Arrival', value: 'arrival' }
+          { text: 'Departure', value: 'start_time' },
+          { text: 'Arrival', value: 'end_time' }
         ],
-        desserts: [
-          {
-            name: 'Ceres',
-            busNo: 159,
-            from: 6.0,
-            to: 24,
-            departure: 4.0,
-            arrival: '1%'
-          },
-          {
-            name: 'Ice cream sandwich',
-            busNo: 237,
-            from: 9.0,
-            to: 37,
-            departure: 4.3,
-            arrival: '1%'
-          },
-        ],
+        schdules: [],
       }
     },
   }

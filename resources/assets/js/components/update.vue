@@ -2,7 +2,7 @@
   <v-card class="mx-auto" max-width="800">
     <v-card-text class="text--primary">
       <center>
-        <form class="registration_form">
+        <v-form class="registration_form">
           <v-text-field
             v-model="name"
             :error-messages="nameErrors"
@@ -128,7 +128,7 @@
           ></v-text-field>
           <v-btn class="mr-4 form_buttons" rounded dark color="primary" @click="submit">submit</v-btn>
           <v-btn class="mr-4 form_buttons" tile outlined color="primary" @click="clear">clear</v-btn>
-        </form>
+        </v-form>
       </center>
     </v-card-text>
   </v-card>
@@ -146,18 +146,20 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, maxLength, integer } from "vuelidate/lib/validators";
+import axios from 'axios';
 export default {
   mounted() {
     const data = this.$route.params.data;
-    this.name = data.name,
-    this.busNo = data.busNo,
-    this.from = data.from,
-    this.start_time = data.departure,
-    this.arrival_time = data.arrival,
-    this.to = data.to, 
-    this.sp = data.child_fare,
-    this.regular = data.adult_fare,
-    this.seats = data.seats
+    this.id = data.id;
+    this.name = data.name;
+    this.busNo = data.bus_number;
+    this.from = data.from;
+    this.start_time = data.start_time;
+    this.arrival_time = data.end_time;
+    this.to = data.to; 
+    this.sp = data.non_regular;
+    this.regular = data.regular;
+    this.seats = data.seats_number;
   },
   mixins: [validationMixin],
   validations: {
@@ -173,6 +175,7 @@ export default {
     seats: { required, integer }
   },
   data: () => ({
+    id:"",
     name: "",
     busNo: "",
     start_time: null,
@@ -249,6 +252,35 @@ export default {
   methods: {
     submit() {
       this.$v.$touch();
+      console.log('id',this.id);
+      let data = {
+        id: this.id,
+        name: this.name,
+        bus_number: this.busNo,
+        start_time: this.start_time,
+        end_time: this.arrival_time,
+        regular: this.regular,
+        non_regular: this.sp,
+        seats_number:this.seats,
+        from: this.from,
+        to: this.to
+      };
+      axios
+        .put('/update_bus/',data)
+        .then(response => {
+          console.log(response);
+          this.$v.$reset();
+          this.name = "";
+          this.busNo = "";
+          this.start_time = null;
+          this.arrival_time = null;
+          this.from = "";
+          this.to = "";
+          this.sp = "";
+          this.regular = "";
+          this.seats = "";
+        })
+        .catch(error => console.log(error));
     },
     clear() {
       this.$v.$reset();

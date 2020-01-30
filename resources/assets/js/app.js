@@ -10,15 +10,17 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuetify from 'vuetify'
 import router from './router'
+import bus from "./bus";
 Vue.use(Vuetify,VueAxios, axios)
+Vue.prototype.$bus = bus;
 /**
 * Next, we will create a fresh Vue application instance and attach it to
 * the page. Then, you may begin adding components to this application
 * or customize the JavaScript scaffolding to fit your unique needs.
 */
 
-Vue.component('example', require('./views/admin.vue'));
-
+Vue.component('example', require('./views/admin.vue'));   //admin
+Vue.component('user', require('./views/user.vue'));       //user side 
 const app = new Vue({
     el: '#app',
     router,

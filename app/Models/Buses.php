@@ -15,7 +15,7 @@ class Buses extends Model
         'duration',
         'regular',
         'non_regular',
-        'seats_id',
+        'seats_number',
         'from',
         'to'
     ];

@@ -21,6 +21,7 @@ class Buses extends Migration
             $table->string('end_time');
             $table->integer('regular');
             $table->integer('non_regular');
+            $table->integer('seats_number');
             $table->string('from');
             $table->string('to');
             $table->timestamps();
