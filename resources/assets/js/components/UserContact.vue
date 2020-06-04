@@ -1,36 +1,39 @@
 <template>
-<div class="container contact-form">
-    <div class="contact-image">
-        <img src="https://library.kissclipart.com/20180915/xue/kissclipart-bus-circle-icon-clipart-bus-interchange-computer-i-c5a778526be30db9.jpg" alt="rocket_contact"/>
+  <div class="container contact-form" id='cont'>
+    <div class="contact-image">	  
+        <img src="https://library.kissclipart.com/20180915/xue/kissclipart-bus-circle-icon-clipart-bus-interchange-computer-i-c5a778526be30db9.jpg" alt="rocket_contact"/>	
+        <form>
+             <h3>For more information contact!</h3>
+             <div class="row">
+                <div class="col-md-12">
+                    <i class="fa fa-address-card bigicon">renan.bargaso@student.passerellesnumeriques.org</i>
+                    <i class="fa fa-address-card bigicon">grace.laborada@student.passerellesnumeriques.org </i>        
+                    <i class="fa fa-address-card bigicon">jakeniel.erim@student.passerellesnumeriques.org</i>
+                   <br>
+                    <i class="h fa fa-globe bigicoon">www.passerellesnumeriques.org</i><br>
+                    <i class="h fa fa-bus" aria-hidden="true">www.busticketing.com</i>
+                </div>
+            </div>
+           
+          
+            <div class="row">
+                <div class="col-md-12">
+                    
+                </div>
+            </div>     
+        </form>
     </div>
-    <form method="post">
-        <h3>Drop Us a Message</h3>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input type="text" name="txtName" class="form-control" placeholder="Your Name *" value="" />
-                </div>
-                <div class="form-group">
-                    <input type="text" name="txtEmail" class="form-control" placeholder="Your Email *" value="" />
-                </div>
-                <div class="form-group">
-                    <input type="text" name="txtPhone" class="form-control" placeholder="Your Phone Number *" value="" />
-                </div>
-                <div class="form-group">
-                    <input type="submit" name="btnSubmit" class="btnContact" value="Send Message" />
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <textarea name="txtMsg" class="form-control" placeholder="Your Message *" style="width: 100%; height: 150px;"></textarea>
-                </div>
-            </div>
-        </div>
-    </form>
 </div>
 </template>
 <style>
-
+#cont{
+    margin-top:10%;	  
+    border-radius: 25px;
+}
+#contactImg{
+    height: 300px;
+    width:300px;
+}
 .contact-form{
     background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
     margin-top: 10%;
@@ -61,24 +64,19 @@
     text-align: center;
     color: red;
 }
-.contact-form .btnContact {
-    width: 50%;
-    border: none;
-    border-radius: 1rem;
-    padding: 1.5%;
-    background: #dc3545;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
+
+.bigicon { 
+    border-radius: 1rem;	  
+    color: #fff;		  
+    cursor: pointer;	  
+    
 }
-.btnContactSubmit
-{
-    width: 50%;
-    border-radius: 1rem;
-    padding: 1.5%;
+.h{
+    font-size: 20px;
     color: #fff;
-    background-color: #0062cc;
-    border: none;
-    cursor: pointer;
+   
 }
+.three{
+    text-align: center;
+}	
 </style>

@@ -5,12 +5,15 @@ import buses from '../components/addBus'
 import schedules from '../components/schedules'
 import bus from '../components/bus'
 import update_bus from '../components/update'
-import form from'../components/form.vue'
+
 
 //user side
+import form from'../components/Userform.vue'
 import welcome from '../components/UserMain.vue'
 import chooseSeat from '../components/UserChooseSeat.vue'
 import contact from '../components/UserContact.vue'
+import ticket from '../components/UserTicket.vue'
+import about from '../components/UserAbout.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -44,6 +47,7 @@ export default new Router({
         {
             path: '/checkout_form',
             name:'form',
+            props:true,
             component: form
         },
         //user side
@@ -55,12 +59,25 @@ export default new Router({
         {
             path: '/chooseSeat',
             name: 'chooseSeat',
+            props:true,
             component: chooseSeat
+           
         },
         {
             path: '/contact',
             name: 'contact',
             component: contact
+        },
+        {
+            path: '/ticket',
+            name: 'ticket',
+            props: true,
+            component: ticket
+        },
+        {
+            path: '/about',
+            name: 'about',
+            component: about
         }
 
     

@@ -12,4 +12,5 @@ class Seats extends Model
         'seat_number',
         'status'
     ];
+    
 }

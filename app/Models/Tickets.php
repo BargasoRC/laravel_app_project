@@ -17,6 +17,16 @@ class Tickets extends Model
         'arrival',
         'bill',
         'ticket_number',
-        'passenger_id'
+        'passenger_id',
+        'status'
     ];
+
+    public function relations_passenger(){
+        return $this->hasOne('App\Models\Passengers','id','passenger_id');
+    }
+
+    public function relations_bus(){
+        return $this->hasOne('App\Models\Buses','id','bus_id');
+    }
+
 }

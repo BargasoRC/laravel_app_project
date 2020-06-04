@@ -5,7 +5,7 @@
 <div class="topnav" id="myTopnav">
   <a href="user#/welcome" class="active"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
   <a href="user#/contact"><i class="fa fa-id-card" aria-hidden="true"></i> Contact</a>
-  <a href="#about"> About</a>
+  <a href="user#/about"> About</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>
@@ -16,18 +16,11 @@
 </template>
 <script>
 
-import router from "../router";
+import router from "../router/User.js";
 export default {
-        mounted() {
-            console.log('Component mounted.')
-        },
+      
         methods:{
-            navHome(){
-                router.push({ path: "/welcome" });
-            },
-            navContact(){
-                router.push({ path: "/welcome" });
-            }
+            
         }   
     }   
 </script>

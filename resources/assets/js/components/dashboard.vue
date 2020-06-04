@@ -26,8 +26,8 @@
           </v-toolbar>
         </template>
         <template v-slot:item.action="{ item }">
-          <v-icon small @click="releaseTicket(item)">far fa-check-circle</v-icon>&nbsp;&nbsp;
-          <v-icon small @click="holdTicket(item)">fas fa-thumbtack</v-icon>
+          <v-icon small v-if="item.status !== 'hold'" @click="releaseTicket(item)">far fa-check-circle</v-icon>&nbsp;&nbsp;
+          <v-icon small v-if="item.status !== 'hold'" @click="holdTicket(item)">fas fa-thumbtack</v-icon>
         </template>
         <template v-slot:no-data>
           <v-btn color="primary" @click="initialize">Reset</v-btn>
@@ -47,6 +47,7 @@
 
 <script>
 import Vue from "vue";
+import axios from 'axios';
 import VueApexCharts from "vue-apexcharts";
 Vue.component("apexchart", VueApexCharts);
 export default {
@@ -98,14 +99,13 @@ export default {
         text: "Passenger",
         align: "left",
         sortable: true,
-        value: "name"
+        value: "relations_passenger.name"
       },
-      { text: "Ticket No.", value: "ticketno" },
-      { text: "Bus Number", value: "busNumber" },
-      { text: "Passenger Type", value: "passengerType" },
+      { text: "Ticket No.", value: "ticket_number" },
+      { text: "Bus Number", value: "relations_bus.bus_number" },
       { text: "From", value: "from" },
       { text: "To", value: "to" },
-      { text: "Fare", value: "fare" },
+      { text: "Fare", value: "bill" },
       { text: "Status", value: "status" },
       { text: "Action", value: "action", sortable: false }
     ],
@@ -134,37 +134,43 @@ export default {
       if (this.desserts !== []) {
         this.loader = false;
       }
-      this.desserts = [
-        {
-          name: "Renan Bargaso",
-          ticketno: "GTX-998-45",
-          busNumber: "9956",
-          passengerType: "Regular",
-          from: "Cebu",
-          to: "Dumaguete",
-          fare: 250,
-          status: "pending"
-        },
-        {
-          name: "Renan Cañete",
-          ticketno: "FORD-99Y-3",
-          busNumber: "9956",
-          passengerType: "Student",
-          from: "Cebu",
-          to: "Dumaguete",
-          fare: 210,
-          status: "pending"
-        }
-      ];
+      let date = {date:new Date().toJSON().slice(0,10).replace(/-/g,'/')};
+      axios 
+        .post('/dashboard',date)
+        .then(res => {
+          console.log(res.data);
+          for(var i = 0; i < res.data.length; ++i){
+            this.desserts.push(res.data[i]);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      this.desserts = [];
     },
     holdTicket(item) {
       const index = this.desserts.indexOf(item);
-      confirm("Are you sure you want to delete this item?") &&
-        this.desserts.splice(index, 1);
+      this.desserts[index].status = "hold";
+      axios
+        .put('/hold_ticket/',item)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        })
     },
     releaseTicket(item) {
       const index = this.desserts.indexOf(item);
       this.desserts[index].status = "released";
+      axios
+        .put(`/release/`,item)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

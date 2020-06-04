@@ -26,6 +26,7 @@ class Tickets extends Migration
             $table->string('ticket_number')->unique();
             $table->string('passenger_id');
             $table->timestamps();
+            $table->string('status');
         });
     }
 

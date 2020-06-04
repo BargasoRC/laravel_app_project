@@ -33,6 +33,7 @@
 
     <v-app-bar id="app_bar" :clipped-left="primaryDrawer.clipped" app>
       <v-icon @click="is_permanent" color="#E3F2FD" dense>fas fa-bars</v-icon>
+      <v-icon class="logout" @click="logout" color="#E3F2FD" dense>fas fa-sign-out-alt</v-icon>
     </v-app-bar>
 
     <v-content class="container_bg">
@@ -59,9 +60,14 @@
 .container_bg {
   background: #e0e0e0;
 }
+.logout{
+  position:absolute;
+  right:10px;
+}
 </style>
 
 <script>
+import axios from 'axios';
 export default {
   data: () => ({
     items: [
@@ -84,6 +90,16 @@ export default {
   methods: {
     is_permanent() {
       this.primaryDrawer.mini = !this.primaryDrawer.mini;
+    },
+    logout(){
+      axios 
+        .post('/logout')
+        .then(res => {
+          location.reload();
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 };

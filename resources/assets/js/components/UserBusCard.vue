@@ -9,7 +9,7 @@
                     </div>
                     <div class="card-body">
                         <h4 class="card-title"><i class="fa fa-bus" aria-hidden="true"></i> {{name}}</h4>
-                        <p class="card-text"><i class="fa fa-chair"></i> Available seats: {{seats}}</p>
+                        <p class="card-text"><i class="fa fa-chair"></i> Passenger Seating Capacity : {{seats}}</p>
                         <p class="card-text"><i class="fa fa-clock" aria-hidden="true"></i> Departure Time: {{departureTime}}</p>
                         <p class="card-text"><i class="fa fa-clock" aria-hidden="true"></i> Arrival Time: {{arrivalTime}}</p>
                         <p class="card-text"><i class="fa fa-hourglass-end" aria-hidden="true"></i> Duration: {{duration}}</p>
@@ -26,18 +26,32 @@
 </template>
 <script>
 import router from "../router";
+import axios from 'axios';
 export default{
     props:{
         id:Number,
         name:String,
         seats:Number,
-        departureTime:Date,
-        arrivalTime: Date,
-        duration: String
-    },  
+        departureTime: String,
+        arrivalTime: String,
+        duration: String,
+        bus:Object
+    },
     methods:{
-        chooseSeat(){
-            router.push({ path: "/chooseSeat" });
+        chooseSeat(){     
+            axios.post('/chooseSeat/'+this.id).then(response=>{
+                let data = {
+                id:this.id,
+                name:this.name,
+                seats: this.seats,
+                departureTime: this.departureTime,
+                arrivalTime: this.arrivalTime,
+                duration: this.duration,
+                bus:this.bus,
+                seats: response
+            }
+            this.$router.push({ name: "chooseSeat", params: { data:data} });
+            });     
         }
     }
 };
